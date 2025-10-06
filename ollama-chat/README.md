@@ -1,57 +1,133 @@
-# KAI FREE GPT
+🚀 KAI FREE GPT
+A Modern, Privacy-First AI Chat Interface Powered by Ollama
 
-A modern, privacy-first AI chat interface powered by Ollama. KAI FREE GPT provides a ChatGPT-like experience while keeping all your data local and secure. Features include real-time chat, model management, reasoning display, image analysis, and image generation capabilities.
+KAI FREE GPT provides a ChatGPT-like experience — but entirely local, ensuring data privacy, model flexibility, and developer freedom. It combines Ollama’s local model runtime with a sleek React-based UI and a modular Node.js backend.
 
-![KAI FREE GPT](https://via.placeholder.com/800x400/0f0f0f/10a37f?text=KAI+FREE+GPT)
+✨ Overview
 
-## Features
+KAI FREE GPT lets you:
 
-### 🤖 **Chat Interface**
-- Real-time streaming responses
-- Markdown rendering with syntax highlighting
-- Message history and conversation management
-- Adjustable model parameters (temperature, top-k, top-p)
-- Copy messages to clipboard
-- Clear chat history
+Chat with local AI models (Mistral, LLaMA, Dolphin, Codellama, etc.)
 
-### 🔧 **Model Management**
-- List all available Ollama models
-- Download/pull new models with progress tracking
-- Delete unused models
-- View model information and metadata
-- Model selection with auto-detection of capabilities
+View reasoning traces (if supported)
 
-### 🧠 **Reasoning Display**
-- Show model thinking process (when supported)
-- Toggle reasoning visibility
-- Separate reasoning from final output
-- Performance metrics (tokens/second, response time)
+Analyze and generate images using LLaVA or Stable Diffusion
 
-### 🖼️ **Image Capabilities**
-- **Vision Models**: Upload and analyze images (llava, bakllava)
-- **Image Generation**: Generate images with text prompts (stable-diffusion)
-- **Image Gallery**: View and download generated images
-- **Batch Operations**: Generate multiple images with different settings
+Manage Ollama models directly from the UI
 
-### 🎨 **Modern UI/UX**
-- Dark theme optimized for long sessions
-- Responsive design for all screen sizes
-- ChatGPT-inspired interface
-- Smooth animations and transitions
-- Real-time connection status
-- Keyboard shortcuts and accessibility
+Enjoy a responsive, ChatGPT-inspired experience — all offline
 
-## Prerequisites
+🧩 Features
+🤖 Chat Interface
 
-Before running this application, make sure you have:
+Real-time streaming responses
 
-1. **Node.js** (v16 or higher)
-2. **Ollama** installed and running
-3. At least one Ollama model downloaded
+Markdown + syntax highlighting for code blocks
 
-### Installing Ollama
+Conversation history & message management
 
-```bash
+Adjustable model parameters (temperature, top-k, top-p)
+
+Copy & export chat logs
+
+Clear chat history
+
+🔧 Model Management
+
+List, pull, and delete Ollama models
+
+Track download progress and disk usage
+
+View detailed metadata (parameters, quantization, size)
+
+Auto-detect model capabilities (vision, reasoning, generation)
+
+🧠 Reasoning Display
+
+Toggle model’s internal “thoughts” (when supported)
+
+Separate reasoning from final answer
+
+Track performance metrics (tokens/sec, latency, output size)
+
+🖼️ Image Capabilities
+
+Image Analysis (via LLaVA/BakLLAVA)
+
+Image Generation (via Stable Diffusion)
+
+Integrated image gallery with previews, downloads, and batch generation
+
+Adjustable diffusion parameters (steps, CFG, dimensions)
+
+🎨 Modern UI/UX
+
+Dark theme optimized for long use
+
+Mobile-first responsive design
+
+Smooth transitions with Framer Motion
+
+Keyboard shortcuts and accessibility support
+
+Real-time Ollama connection indicator
+
+⚙️ Project Architecture
+📁 Folder Structure
+KAI-FREE-GPT/
+├── client/                     # React Frontend
+│   ├── public/                 # Static files (favicon, manifest, logo)
+│   ├── src/
+│   │   ├── assets/             # Images, icons, and theme files
+│   │   ├── components/         # UI components (ChatBox, Sidebar, Header, etc.)
+│   │   ├── pages/              # Route-based pages (Chat, Models, Images)
+│   │   ├── services/           # API service handlers (Axios)
+│   │   ├── hooks/              # Custom React hooks
+│   │   ├── context/            # Context Providers (Auth, Settings, Theme)
+│   │   ├── utils/              # Helpers (formatting, constants, local storage)
+│   │   └── App.jsx             # Main React app entry
+│   ├── package.json
+│   └── vite.config.js          # or CRA config (depending on setup)
+│
+├── server/                     # Node.js + Express Backend
+│   ├── routes/                 # API routes (chat.js, model.js, image.js)
+│   ├── controllers/            # Logic separated from routes
+│   ├── middleware/             # Error handling, logging, rate limiting
+│   ├── services/               # Ollama API integration and utilities
+│   ├── utils/                  # Helper functions
+│   ├── index.js                # Express entry point
+│   ├── .env                    # Server environment variables
+│   ├── package.json
+│   └── README.md
+│
+├── shared/                     # Shared configuration or constants
+│   └── config.js
+│
+├── scripts/                    # Utility scripts (setup, cleanup, deploy)
+│
+├── .env                        # Root environment variables (optional)
+├── package.json                # Root npm file (contains scripts to run all)
+└── README.md                   # Project documentation
+
+🧠 Tech Stack
+Layer	Technology	Purpose
+Frontend	React + Vite	Fast, modern UI
+Backend	Node.js + Express	REST API for chat, model, and image ops
+Model Runtime	Ollama	Local AI model execution
+Image Handling	Multer (upload), Sharp (resize)	Secure file operations
+Styling	TailwindCSS + Framer Motion	Responsive and animated UI
+State Management	React Context + Local Storage	Theme, model, chat persistence
+🧰 Prerequisites
+
+Before installing:
+
+Node.js v16+
+
+npm or yarn
+
+Ollama installed and running locally
+
+Install Ollama
 # macOS
 brew install ollama
 
@@ -60,288 +136,186 @@ curl -fsSL https://ollama.ai/install.sh | sh
 
 # Windows
 # Download from https://ollama.ai/download
-```
 
-### Starting Ollama Service
 
-```bash
-# Start Ollama service (runs on localhost:11434 by default)
+Start Ollama service:
+
 ollama serve
-```
 
-### Download Your First Models
 
-```bash
-# Download LLaVA for vision capabilities
-ollama pull llava
+Verify:
 
-# Download GPT-4-like model
-ollama pull dolphin-mistral:7b
-
-# Download code-focused model
-ollama pull codellama
-
-# List downloaded models
-ollama list
-```
-
-## Installation & Setup
-
-### 1. Clone and Install
-
-```bash
-# Clone the repository
-git clone <repository-url>
-cd ollama-chat
-
-# Install all dependencies (root, server, and client)
-npm run install:all
-```
-
-### 2. Configuration
-
-The application uses default configuration that should work out of the box. If you need to customize:
-
-**Server Configuration** (`server/.env`):
-```env
-PORT=3001
-OLLAMA_BASE_URL=http://localhost:11434
-```
-
-**Client Configuration** (optional):
-```env
-REACT_APP_API_URL=http://localhost:3001/api
-```
-
-### 3. Run the Application
-
-```bash
-# Start both server and client in development mode
-npm run dev
-
-# Or start individually:
-# npm run server:dev  # Backend only
-# npm run client:dev  # Frontend only
-```
-
-### 4. Access the Application
-
-Open your browser and navigate to:
-- **Main Application**: http://localhost:3000
-- **API Health Check**: http://localhost:3001/api/health
-
-## Usage Guide
-
-### Getting Started
-
-1. **Check Connection**: Ensure the connection status shows "Connected" in the header
-2. **Manage Models**: Go to the "Models" tab to download your first model if none are available
-3. **Select Model**: Choose a model from the sidebar or models page
-4. **Start Chatting**: Return to the "Chat" tab and begin your conversation
-
-### Model Types & Capabilities
-
-#### **Text Models**
-- `mistral`, `llama2`, `dolphin-mistral` - General conversation
-- `codellama`, `deepseek-coder` - Code generation and analysis
-- `wizard-math` - Mathematical reasoning
-
-#### **Vision Models** 🔍
-- `llava` - Image analysis and description
-- `bakllava` - Advanced vision understanding
-- Upload images in chat for analysis
-
-#### **Image Generation** 🎨
-- `stable-diffusion` - Generate images from prompts
-- Adjustable parameters (steps, CFG scale, dimensions)
-- Download generated images
-
-### Chat Features
-
-#### **Basic Chat**
-1. Select a model from the sidebar
-2. Type your message and press Enter or click Send
-3. View streaming responses in real-time
-
-#### **Image Analysis** (Vision Models)
-1. Select a vision model (llava, bakllava)
-2. Click the image upload button 📎
-3. Select an image and add a prompt
-4. Send to get detailed image analysis
-
-#### **Advanced Settings**
-- **Temperature**: Controls randomness (0.0 = deterministic, 2.0 = very creative)
-- **Top K**: Limits vocabulary choices (lower = more focused)
-- **Top P**: Nucleus sampling (lower = more focused)
-- **Show Reasoning**: Display model's thinking process
-
-### Model Management
-
-#### **Download Models**
-1. Go to "Models" tab
-2. Enter model name (e.g., `llava`, `mistral:7b`)
-3. Click "Download" and monitor progress
-4. Popular models are suggested for quick selection
-
-#### **Model Information**
-- Click the info button (ℹ️) to view model details
-- See parameters, format, and capabilities
-- Check model size and last modified date
-
-#### **Delete Models**
-- Click the trash button (🗑️) to remove models
-- Confirmation required to prevent accidents
-- Frees up disk space
-
-### Image Generation
-
-1. **Select Compatible Model**: Choose a model that supports image generation
-2. **Enter Prompt**: Describe the image you want to create
-3. **Adjust Settings**:
-   - **Seed**: For reproducible results (-1 for random)
-   - **Steps**: Quality vs speed (10-100)
-   - **CFG Scale**: Prompt adherence (1-20)
-   - **Dimensions**: Output image size
-4. **Generate**: Click "Generate Image" and wait for results
-5. **Download**: Hover over images to download
-
-## API Endpoints
-
-The backend provides a RESTful API:
-
-### **Models**
-- `GET /api/models` - List available models
-- `POST /api/models/pull` - Download a model (SSE)
-- `DELETE /api/models/:name` - Delete a model
-- `GET /api/models/:name/info` - Get model information
-
-### **Chat**
-- `POST /api/chat` - Chat with streaming response (SSE)
-
-### **Images**
-- `POST /api/generate-image` - Generate image from prompt
-- `POST /api/analyze-image` - Analyze uploaded image
-
-### **Utility**
-- `GET /api/health` - Health check
-
-## Troubleshooting
-
-### Common Issues
-
-#### **"Connection Failed" Error**
-```bash
-# Check if Ollama is running
 curl http://localhost:11434/api/tags
 
-# Start Ollama if not running
-ollama serve
+⚡ Setup & Installation
+1️⃣ Clone Repository
+git clone https://github.com/<your-username>/kai-free-gpt.git
+cd kai-free-gpt
 
-# Check for port conflicts
-netstat -an | grep 11434
-```
+2️⃣ Install All Dependencies
+npm run install:all
 
-#### **"No Models Available"**
-```bash
-# Download a basic model
-ollama pull llama2
 
-# Verify installation
-ollama list
-```
+This runs:
 
-#### **Slow Response Times**
-- Use smaller models (7B vs 13B/70B parameters)
-- Ensure adequate RAM (8GB+ recommended)
-- Close other resource-intensive applications
+npm install           # at root
+cd client && npm install
+cd ../server && npm install
 
-#### **Image Upload Not Working**
-- Ensure you've selected a vision model (llava, bakllava)
-- Check file size (10MB limit)
-- Supported formats: JPEG, PNG, GIF, WebP
+3️⃣ Environment Configuration
+Backend (server/.env)
+PORT=3001
+OLLAMA_BASE_URL=http://localhost:11434
+ALLOWED_ORIGIN=http://localhost:3000
+MAX_UPLOAD_SIZE=10mb
 
-### Performance Optimization
+Frontend (client/.env)
+REACT_APP_API_URL=http://localhost:3001/api
+REACT_APP_APP_NAME="KAI FREE GPT"
 
-#### **For Better Speed**
-```bash
-# Use quantized models
-ollama pull llama2:7b-q4_0
+4️⃣ Run the Application
+# Start both frontend & backend
+npm run dev
 
-# Enable GPU acceleration (if available)
-# Ollama automatically uses GPU when detected
-```
 
-#### **Memory Management**
-- Monitor system RAM usage
-- Use `ollama ps` to see running models
-- Models load automatically and stay in memory
+Or separately:
 
-## Development
+npm run server:dev
+npm run client:dev
 
-### Project Structure
-```
-ollama-chat/
-├── client/                 # React frontend
-│   ├── src/
-│   │   ├── components/     # React components
-│   │   ├── services/       # API services
-│   │   └── hooks/          # Custom hooks
-├── server/                 # Express backend
-│   ├── index.js           # Main server file
-│   └── .env               # Environment variables
-└── package.json           # Root package file
-```
+5️⃣ Access App
 
-### Contributing
+Frontend: http://localhost:3000
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+Backend Health: http://localhost:3001/api/health
 
-### Available Scripts
+💬 Using KAI FREE GPT
+🧠 Start Chatting
 
-```bash
-# Development
-npm run dev              # Start both client and server
-npm run client:dev       # Start React dev server
-npm run server:dev       # Start Express server with nodemon
+Select a model (e.g. llama2, dolphin-mistral)
 
-# Production
-npm run build           # Build React app
-npm start              # Start production server
+Type a prompt and hit Enter
 
-# Utilities
-npm run install:all    # Install all dependencies
-```
+Watch real-time streaming responses
 
-## License
+🖼️ Image Analysis
 
-MIT License - see LICENSE file for details.
+Choose llava or bakllava
 
-## Acknowledgments
+Upload an image + text query
 
-- **Ollama** - For providing the local AI model runtime
-- **React** - Frontend framework
-- **Express.js** - Backend server
-- **OpenAI** - UI/UX inspiration from ChatGPT
+Get AI-generated descriptions or analysis
 
-## Support
+🎨 Image Generation
 
-For issues and questions:
-1. Check the troubleshooting section
-2. Review Ollama documentation
-3. Open a GitHub issue with detailed information
+Switch to stable-diffusion
 
----
+Write a creative prompt
 
-## Contact & Support
+Adjust steps, scale, and dimensions
 
-- **Email**: freegpt@kartikbhardwaj.me
-- **Website**: https://www.kartikbhardwaj.me/freegpt
-- **Developer**: Kartik Bhardwaj
+Generate and download the image
 
----
+🧩 Model Management
 
-**Happy chatting with KAI FREE GPT! 🤖✨**
+Pull new models: ollama pull mistral
+
+Delete unused: ollama delete <model>
+
+View details: ollama show <model>
+
+🧱 Design & Development Philosophy
+🎯 Frontend Design Principles
+
+Component-Based Architecture: Modular, reusable UI elements
+
+Context Providers: Centralized app-wide settings (theme, model, chat)
+
+Asynchronous State Management: Streamed responses handled with EventSource API
+
+Responsive Layout: Flexbox + Tailwind grid system
+
+Modern UX: Inspired by ChatGPT but fully offline
+
+⚙️ Backend Design
+
+Layered MVC Structure: Controllers, routes, services separated
+
+Secure Communication: CORS-controlled and sanitized inputs
+
+Ollama Service Wrapper: Reusable functions to handle model requests
+
+Streaming API Support: Server-Sent Events (SSE) for real-time text and progress
+
+🧑‍💻 Code Quality
+
+ESLint + Prettier enforced
+
+Consistent naming conventions
+
+Modularized error handling
+
+Environment-based logging
+
+🧪 Available NPM Scripts
+# Root
+npm run dev             # Run both client and server
+npm run install:all     # Install all deps
+npm run build           # Build React client for production
+
+# Server
+npm run server:dev      # Start Express server with nodemon
+
+# Client
+npm run client:dev      # Run frontend dev server
+npm run client:build    # Build production-ready frontend
+npm run client:lint     # Lint client code
+
+🛠️ API Endpoints
+Endpoint	Method	Description
+/api/models	GET	List available models
+/api/models/pull	POST	Download new model
+/api/models/:name/info	GET	Model details
+/api/models/:name	DELETE	Delete model
+/api/chat	POST	Send message (SSE streaming)
+/api/analyze-image	POST	Analyze uploaded image
+/api/generate-image	POST	Generate image
+/api/health	GET	Server status
+🔒 Privacy & Security
+
+All chats and images are processed locally.
+
+No data leaves your system.
+
+No telemetry, tracking, or analytics.
+
+Optional encrypted chat storage (coming soon).
+
+🧑‍💼 Contributing
+
+Fork the repository
+
+Create a new branch (feature/new-ui)
+
+Commit your changes
+
+Submit a pull request
+
+All contributions are welcome — code, design, documentation, or testing!
+
+📜 License
+
+MIT License
+© 2025 Kartik Bhardwaj — All Rights Reserved
+
+💬 Contact
+
+Email: freegpt@kartikbhardwaj.me
+
+Website: https://www.kartikbhardwaj.me/freegpt
+
+Developer: Kartik Bhardwaj
+
+🌟 “Own Your AI — Locally, Privately, and Powerfully.”
+
+Happy chatting with KAI FREE GPT! 🤖✨
